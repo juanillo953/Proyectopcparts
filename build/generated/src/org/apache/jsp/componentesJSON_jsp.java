@@ -44,13 +44,12 @@ public final class componentesJSON_jsp extends org.apache.jasper.runtime.HttpJsp
       _jspx_out = out;
       _jspx_resourceInjector = (org.glassfish.jsp.api.ResourceInjector) application.getAttribute("com.sun.appserv.jsp.resource.injector");
 
-      out.write("\n");
-      out.write("\n");
-      out.write("\n");
-      out.write("\n");
-      out.write("\n");
-String busqueda = "a";
-        //request.getParameter("comp");
+      out.write("\r\n");
+      out.write("\r\n");
+      out.write("\r\n");
+      out.write("\r\n");
+      out.write("\r\n");
+String busqueda = request.getParameter("comp");
 Bd bd = new Bd();
 bd.abrirConexion();
 List<Componente> componentes = bd.obtenerComponentes(busqueda);

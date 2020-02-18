@@ -1,6 +1,12 @@
 window.onload = iniciar;
 
 function iniciar(){
+    span = document.getElementsByClassName("close")[0];
+    span.onclick = function() {
+        modal.style.display = "none";
+      }
+    txt3="";
+    txt4="";
     document.getElementById("busqueda").onkeyup = consultaDatos;
     consultaMarcas();
     
@@ -45,7 +51,7 @@ function procesaDatos(){
             var respuesta = JSON.parse(respuestaJSON);
             var txt = "";
             for(contador=0;contador<respuesta.length;contador++){
-                txt+= "<div class='compo'><img src='"+respuesta[contador].foto+"' alt=''><h4>"+respuesta[contador].nombre+"</h4><h4 class='orange'>"+respuesta[contador].precio+"€</h4></div>";
+                txt+= "<div class='compo' onclick='muestraModal(this)'><img src='"+respuesta[contador].foto+"' alt=''><h4>"+respuesta[contador].nombre+"</h4><h4 class='orange'>"+respuesta[contador].precio+"€</h4></div>";
             }
             document.getElementById("grande").innerHTML = txt;
         }
@@ -103,7 +109,7 @@ function procesaCategorias(){
             var txt2 = "";
             for(contador=0;contador<respuesta2.length;contador++){
                 console.log(respuesta2[contador].nombre);
-                txt2+="<label><input type='checkbox' id='"+(contador+100)+"' value='"+respuesta2[contador].nombre+"' onclick='seleccionaMarca(this)'> "+respuesta2[contador].nombre+"</label><br>";
+                txt2+="<label><input type='checkbox' id='"+(contador+100)+"' value='"+respuesta2[contador].nombre+"' onclick='seleccionaCategoria(this)'> "+respuesta2[contador].nombre+"</label><br>";
             }
             document.getElementById("pequenoN2").innerHTML = txt2;
         }
@@ -113,12 +119,13 @@ function seleccionaMarca(){
     var div = document.getElementById("pequeno");
 
     var elementos = div.getElementsByTagName("input");
-    var txt3="";
+    txt3="";
     for(contador=0;contador<elementos.length;contador++){
         if(elementos[contador].checked){
             txt3+="'"+elementos[contador].value+"',";
         }
     }
+    peticionMarcasConCategorias();
     peticion_http3 = inicializa_xhr();
     if(peticion_http3){
 
@@ -143,12 +150,134 @@ function procesaSeleccion(){
 
             respuestaJSON = peticion_http3.responseText;
             var respuesta = JSON.parse(respuestaJSON);
-            var txt4 = "";
+            var txt7 = "";
             for(contador=0;contador<respuesta.length;contador++){
-                txt4+= "<div class='compo'><img src='"+respuesta[contador].foto+"' alt=''><h4>"+respuesta[contador].nombre+"</h4><h4 class='orange'>"+respuesta[contador].precio+"€</h4></div>";
+                txt7+= "<div class='compo' onclick='muestraModal(this)'><img src='"+respuesta[contador].foto+"' alt=''><h4>"+respuesta[contador].nombre+"</h4><h4 class='orange'>"+respuesta[contador].precio+"€</h4></div>";
             }
-            document.getElementById("grande").innerHTML = txt4;
+            document.getElementById("grande").innerHTML = txt7;
         }
     }
 }
+function seleccionaCategoria(){
+    var div = document.getElementById("pequenoN2");
+
+    var elementos = div.getElementsByTagName("input");
+    txt4="";
+    for(contador=0;contador<elementos.length;contador++){
+        if(elementos[contador].checked){
+            txt4+="'"+elementos[contador].value+"',";
+        }
+    }
+    peticion_http4 = inicializa_xhr();
+    if(peticion_http4){
+
+        peticion_http4.onreadystatechange = procesaSeleccionCategoria;
+
+        peticion_http4.open("POST","seleccionCategoriasJSON.jsp",true);
+        peticion_http4.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
+        if(txt4!="" && txt3!=""){
+            var seleccion = "seleccionC="+encodeURIComponent(txt4)+"&seleccionM="+encodeURIComponent(txt3);
+            peticion_http4.send(seleccion);
+        }
+        else if(txt4!=""){
+            var seleccion = "seleccionC="+encodeURIComponent(txt4);
+            peticion_http4.send(seleccion);
+        }
+        else if(txt3!=""){
+            seleccionaMarca();
+        }
+        else{
+            document.getElementById("grande").innerHTML="";
+        }
+
+    }
+}
+function procesaSeleccionCategoria(){
+    if(peticion_http4.readyState==4){
+
+        if(peticion_http4.status==200){
+
+            respuestaJSON = peticion_http4.responseText;
+            var respuesta = JSON.parse(respuestaJSON);
+            var txt6 = "";
+            for(contador=0;contador<respuesta.length;contador++){
+                txt6+= "<div class='compo' onclick='muestraModal(this)'><img src='"+respuesta[contador].foto+"' alt=''><h4>"+respuesta[contador].nombre+"</h4><h4 class='orange'>"+respuesta[contador].precio+"€</h4></div>";
+            }
+            document.getElementById("grande").innerHTML = txt6;
+        }
+    }
+}
+function peticionMarcasConCategorias(){
+    peticion_http5 = inicializa_xhr();
+    if(peticion_http5){
+
+        peticion_http5.onreadystatechange = procesaMarcasConCategorias;
+
+        peticion_http5.open("POST","procesaMarcasConCategoriasJSON.jsp",true);
+        peticion_http5.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
+        if(txt3!=""){
+            var seleccion = "seleccion="+encodeURIComponent(txt3);
+            peticion_http5.send(seleccion);
+        }
+        else{
+            document.getElementById("grande").innerHTML="";
+            consultaCategorias();
+        }
+
+    }
+}
+function procesaMarcasConCategorias(){
+    if(peticion_http5.readyState==4){
+        if(peticion_http5.status==200){
+            respuestaJSON2 = peticion_http5.responseText;
+            var respuesta2 = JSON.parse(respuestaJSON2);
+            var txt2 = "";
+            for(contador=0;contador<respuesta2.length;contador++){
+                console.log(respuesta2[contador].nombre);
+                txt2+="<label><input type='checkbox' id='"+(contador+100)+"' value='"+respuesta2[contador].nombre+"' onclick='seleccionaCategoria(this)'> "+respuesta2[contador].nombre+"</label><br>";
+            }
+            document.getElementById("pequenoN2").innerHTML = txt2;
+        }
+    }
+}
+function muestraModal(item){
+
+    var modal2 = document.getElementById("modal");
+    console.log(modal2);
+    var nombre = item.getElementsByTagName("h4")[0].innerHTML;
+    peticion_http6 = inicializa_xhr();
+    if(peticion_http6){
+
+        var busqueda = document.getElementById("busqueda").value;
+
+        peticion_http6.onreadystatechange = muestraLosDatosEnModal;
+
+        peticion_http6.open("POST","sacarDatosComponente.jsp",true);
+        peticion_http6.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
+        var componente = "comp="+encodeURIComponent(nombre);
+        peticion_http6.send(componente);
+
+
+    }
+    modal2.style.display="block";
+
+    console.log(nombre);
+   
+}
+function muestraLosDatosEnModal(){
+    if(peticion_http.readyState==4){
+
+        if(peticion_http.status==200){
+
+            respuestaJSON = peticion_http.responseText;
+            var respuesta = JSON.parse(respuestaJSON);
+            var txt = "";
+            for(contador=0;contador<respuesta.length;contador++){
+                txt+= "<div class='compoModal' onclick='muestraModal(this)'><img class='centro' src='"+respuesta[contador].foto+"' alt=''><h4>"+respuesta[contador].nombre+"</h4><h4 class='orange'>"+respuesta[contador].precio+"€</h4></div>";
+            }
+            document.getElementById("dentroModal").innerHTML = txt;
+        }
+    }
+}
+
 

@@ -133,4 +133,162 @@ public class Bd {
         
       return componentes;
       }
+    public List<Componente> obtenerComponentesCategoria(String seleccionC, String seleccionM){
+          List<Componente> componentes = new ArrayList<>();
+          List<Integer> marcas = new ArrayList<>();
+          List<Integer> categorias = new ArrayList<>();
+          String sql ="SELECT * FROM fabricante where nombre in("+seleccionM+")";
+      try {
+          pst = conn.prepareStatement(sql);
+          rs = pst.executeQuery();
+          while(rs.next()){
+              marcas.add(rs.getInt(1));
+          }
+      } catch (SQLException ex) {
+          Logger.getLogger(Bd.class.getName()).log(Level.SEVERE, null, ex);
+      }
+      String numeros="";
+      for(int contador=0;contador<marcas.size();contador++){
+          numeros+=marcas.get(contador)+",";
+      }
+      numeros=numeros.substring(0,numeros.length()-1);
+      
+        String sql2 ="SELECT * FROM categoria where nombre in("+seleccionC+")";
+       try {
+          pst = conn.prepareStatement(sql2);
+          rs = pst.executeQuery();
+          while(rs.next()){
+              categorias.add(rs.getInt(1));
+          }
+      } catch (SQLException ex) {
+          Logger.getLogger(Bd.class.getName()).log(Level.SEVERE, null, ex);
+      }
+       String numeros2="";
+       for(int contador2=0;contador2<categorias.size();contador2++){
+         numeros2+=categorias.get(contador2)+",";  
+       }
+       numeros2=numeros2.substring(0,numeros2.length()-1);
+        String sql3 = "SELECT * FROM componente where id_fabricante in ("+numeros+") and id_categoria in ("+numeros2+")";
+      try {
+          pst = conn.prepareStatement(sql3);
+          rs = pst.executeQuery();
+          while(rs.next()){
+              String nombre = rs.getString(2);
+              String descripcion = rs.getString(3);
+              float precio = rs.getFloat(4);
+              String foto = rs.getString(7);
+              Componente componente = new Componente(nombre, descripcion, precio,foto);
+              componentes.add(componente);
+          }
+      } catch (SQLException ex) {
+          Logger.getLogger(Bd.class.getName()).log(Level.SEVERE, null, ex);
+      }
+        
+      return componentes;
+      }
+    public List<Componente> obtenerComponentesSoloCategoria(String seleccionC){
+          List<Componente> componentes = new ArrayList<>();
+          List<Integer> categorias = new ArrayList<>();
+          String sql ="SELECT * FROM categoria where nombre in("+seleccionC+")";
+      try {
+          pst = conn.prepareStatement(sql);
+          rs = pst.executeQuery();
+          while(rs.next()){
+              categorias.add(rs.getInt(1));
+          }
+      } catch (SQLException ex) {
+          Logger.getLogger(Bd.class.getName()).log(Level.SEVERE, null, ex);
+      }
+      String numeros="";
+      for(int contador=0;contador<categorias.size();contador++){
+          numeros+=categorias.get(contador)+",";
+      }
+      numeros=numeros.substring(0,numeros.length()-1);
+        String sql2 = "SELECT * FROM componente where id_categoria in ("+numeros+")";
+      try {
+          pst = conn.prepareStatement(sql2);
+          rs = pst.executeQuery();
+          while(rs.next()){
+              String nombre = rs.getString(2);
+              String descripcion = rs.getString(3);
+              float precio = rs.getFloat(4);
+              String foto = rs.getString(7);
+              Componente componente = new Componente(nombre, descripcion, precio,foto);
+              componentes.add(componente);
+          }
+      } catch (SQLException ex) {
+          Logger.getLogger(Bd.class.getName()).log(Level.SEVERE, null, ex);
+      }
+        
+      return componentes;
+      }
+    public List<Categoria> obtenerCategoriasMarca(String seleccion){
+          List<Componente> componentes = new ArrayList<>();
+          List<Integer> marcas = new ArrayList<>();
+          List<Integer> categorias = new ArrayList<>();
+          String sql ="SELECT * FROM fabricante where nombre in("+seleccion+")";
+            try {
+                pst = conn.prepareStatement(sql);
+                rs = pst.executeQuery();
+                while(rs.next()){
+                    marcas.add(rs.getInt(1));
+                }
+            } catch (SQLException ex) {
+                Logger.getLogger(Bd.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            String numeros="";
+            for(int contador=0;contador<marcas.size();contador++){
+                numeros+=marcas.get(contador)+",";
+            }
+            numeros=numeros.substring(0,numeros.length()-1);
+              String sql2 = "SELECT * FROM componente where id_fabricante in ("+numeros+")";
+            try {
+                pst = conn.prepareStatement(sql2);
+                rs = pst.executeQuery();
+                while(rs.next()){
+                    categorias.add(rs.getInt(5));
+                }
+            } catch (SQLException ex) {
+                Logger.getLogger(Bd.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            String numeros2="";
+             for(int contador2=0;contador2<categorias.size();contador2++){
+               numeros2+=categorias.get(contador2)+",";  
+             }
+              numeros2=numeros2.substring(0,numeros2.length()-1);
+                List<Categoria> categoriasList = new ArrayList<>();
+                  String sql3 = "SELECT * FROM categoria where id in ("+numeros2+")";
+              try {
+                  pst = conn.prepareStatement(sql3);
+                  rs = pst.executeQuery();
+                  while(rs.next()){
+                      String nombre = rs.getString(2);
+                      Categoria categoria= new Categoria(nombre);
+                      categoriasList.add(categoria);
+                  }
+              } catch (SQLException ex) {
+                  Logger.getLogger(Bd.class.getName()).log(Level.SEVERE, null, ex);
+              }
+
+            return categoriasList;
+      }
+     public List<Componente> obtenerComponentesNombre(String nombre){
+       List<Componente> componentes = new ArrayList<>();
+       String sql = "SELECT * FROM componente where nombre like '"+nombre+"'";
+      try {
+          pst = conn.prepareStatement(sql);
+           rs = pst.executeQuery();
+            while(rs.next()){
+                    String descripcion = rs.getString(3);
+                    float precio = rs.getFloat(4);
+                    String foto = rs.getString(7);
+                    Componente componente = new Componente(nombre, descripcion, precio,foto);
+                    componentes.add(componente);
+            }
+      } catch (SQLException ex) {
+          Logger.getLogger(Bd.class.getName()).log(Level.SEVERE, null, ex);
+      }
+      return componentes;
+   
+   }
 }
