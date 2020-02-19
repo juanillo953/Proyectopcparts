@@ -3,16 +3,19 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
+            <file>file:/C:/Users/Alumno_2DAW/Documents/NetBeansProjects/Proyectopcparts/web/index.html</file>
+            <file>file:/C:/Users/Alumno_2DAW/Documents/NetBeansProjects/Proyectopcparts/web/procesaMarcasConCategoriasJSON.jsp</file>
+            <file>file:/C:/Users/Alumno_2DAW/Documents/NetBeansProjects/Proyectopcparts/src/java/modelo/Categoria.java</file>
+            <file>file:/C:/Users/Alumno_2DAW/Documents/NetBeansProjects/Proyectopcparts/web/sacarDatosComponente.jsp</file>
+            <file>file:/C:/Users/Alumno_2DAW/Documents/NetBeansProjects/Proyectopcparts/web/componentesJSON.jsp</file>
             <file>file:/C:/Users/Alumno_2DAW/Documents/NetBeansProjects/Proyectopcparts/web/categoriasJSON.jsp</file>
             <file>file:/C:/Users/Alumno_2DAW/Documents/NetBeansProjects/Proyectopcparts/src/java/modelo/Marca.java</file>
             <file>file:/C:/Users/Alumno_2DAW/Documents/NetBeansProjects/Proyectopcparts/web/marcasJSON.jsp</file>
             <file>file:/C:/Users/Alumno_2DAW/Documents/NetBeansProjects/Proyectopcparts/web/seleccionJSON.jsp</file>
-            <file>file:/C:/Users/Alumno_2DAW/Documents/NetBeansProjects/Proyectopcparts/web/index.html</file>
-            <file>file:/C:/Users/Alumno_2DAW/Documents/NetBeansProjects/Proyectopcparts/src/java/modelo/Categoria.java</file>
             <file>file:/C:/Users/Alumno_2DAW/Documents/NetBeansProjects/Proyectopcparts/src/java/modelo/Componente.java</file>
             <file>file:/C:/Users/Alumno_2DAW/Documents/NetBeansProjects/Proyectopcparts/src/java/controlador/Bd.java</file>
+            <file>file:/C:/Users/Alumno_2DAW/Documents/NetBeansProjects/Proyectopcparts/web/seleccionCategoriasJSON.jsp</file>
             <file>file:/C:/Users/Alumno_2DAW/Documents/NetBeansProjects/Proyectopcparts/web/codigo.js</file>
-            <file>file:/C:/Users/Alumno_2DAW/Documents/NetBeansProjects/Proyectopcparts/web/componentesJSON.jsp</file>
         </group>
     </open-files>
 </project-private>

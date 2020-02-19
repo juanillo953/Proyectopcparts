@@ -8,7 +8,8 @@
 <%@page import="modelo.Componente"%>
 <%@page import="controlador.Bd"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<%String seleccionC = request.getParameter("seleccionC");
+<%  request.setCharacterEncoding("UTF-8");
+    String seleccionC = request.getParameter("seleccionC");
 seleccionC = seleccionC.substring(0,seleccionC.length()-1);
 String seleccionM = request.getParameter("seleccionM");
 List<Componente> componentes = null;
