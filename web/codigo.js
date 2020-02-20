@@ -77,7 +77,7 @@ function procesaMarcas(){
         if(peticion_http1.status==200){
             respuestaJSON = peticion_http1.responseText;
             var respuesta = JSON.parse(respuestaJSON);
-            var txt = "";
+            var txt = "<h2>Marcas</h2>";
             for(contador=0;contador<respuesta.length;contador++){
                 console.log(respuesta[contador].nombre);
                 txt+="<label><input type='checkbox' id='"+contador+"' value='"+respuesta[contador].nombre+"' onclick='seleccionaMarca()'> "+respuesta[contador].nombre+"</label><br>";
@@ -106,7 +106,7 @@ function procesaCategorias(){
         if(peticion_http2.status==200){
             respuestaJSON2 = peticion_http2.responseText;
             var respuesta2 = JSON.parse(respuestaJSON2);
-            var txt2 = "";
+            var txt2 = "<h2>Categorias</h2>";
             for(contador=0;contador<respuesta2.length;contador++){
                 console.log(respuesta2[contador].nombre);
                 txt2+="<label><input type='checkbox' id='"+(contador+100)+"' value='"+respuesta2[contador].nombre+"' onclick='seleccionaCategoria(this)'> "+respuesta2[contador].nombre+"</label><br>";
@@ -231,7 +231,7 @@ function procesaMarcasConCategorias(){
         if(peticion_http5.status==200){
             respuestaJSON2 = peticion_http5.responseText;
             var respuesta2 = JSON.parse(respuestaJSON2);
-            var txt2 = "";
+            var txt2 = "<h2>Categorias</h2>";
             for(contador=0;contador<respuesta2.length;contador++){
                 console.log(respuesta2[contador].nombre);
                 txt2+="<label><input type='checkbox' id='"+(contador+100)+"' value='"+respuesta2[contador].nombre+"' onclick='seleccionaCategoria(this)'> "+respuesta2[contador].nombre+"</label><br>";
@@ -265,17 +265,17 @@ function muestraModal(item){
    
 }
 function muestraLosDatosEnModal(){
-    if(peticion_http.readyState==4){
+    if(peticion_http6.readyState==4){
 
-        if(peticion_http.status==200){
+        if(peticion_http6.status==200){
 
-            respuestaJSON = peticion_http.responseText;
+            respuestaJSON = peticion_http6.responseText;
             var respuesta = JSON.parse(respuestaJSON);
-            var txt = "";
             for(contador=0;contador<respuesta.length;contador++){
-                txt+= "<div class='compoModal' onclick='muestraModal(this)'><img class='centro' src='"+respuesta[contador].foto+"' alt=''><h4>"+respuesta[contador].nombre+"</h4><h4 class='orange'>"+respuesta[contador].precio+"€</h4></div>";
+                document.getElementById("nombreProducto").innerHTML=respuesta[contador].nombre;
+                document.getElementById("precioProducto").innerHTML=respuesta[contador].precio+"€";
+                document.getElementById("imagenProducto").src=respuesta[contador].foto;
             }
-            document.getElementById("dentroModal").innerHTML = txt;
         }
     }
 }

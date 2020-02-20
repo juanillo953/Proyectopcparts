@@ -8,7 +8,7 @@
 <%@page import="modelo.Componente"%>
 <%@page import="controlador.Bd"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<%String nombre = request.getParameter("componente");
+<%String nombre = request.getParameter("comp");
 Bd bd = new Bd();
 bd.abrirConexion();
 List<Componente> componente = bd.obtenerComponentesNombre(nombre);

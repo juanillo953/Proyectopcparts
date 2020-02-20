@@ -34,7 +34,6 @@ public class Bd {
    public void abrirConexion() throws ClassNotFoundException, SQLException{
     Class.forName(drv);
     conn = DriverManager.getConnection(db,user,"");
-       System.out.println("La conexion se realizo con exito");
    }
    public void cerrarConexion() throws SQLException{
     if(pst != null)pst.close();
