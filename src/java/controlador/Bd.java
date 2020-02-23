@@ -15,6 +15,7 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import modelo.Categoria;
+import modelo.Comentario;
 import modelo.Componente;
 import modelo.Marca;
 
@@ -290,4 +291,60 @@ public class Bd {
       return componentes;
    
    }
+     public boolean agregarComentario(String comp, String nombreUs,String comentario, int puntuacion){
+         boolean agregado = false;
+         int id_componente = 0;
+         String sql = "SELECT * FROM componente where nombre like '"+comp+"'";
+      try {
+          pst = conn.prepareStatement(sql);
+          rs = pst.executeQuery();
+          while(rs.next()){
+             id_componente = rs.getInt(1);
+          
+          }
+      } catch (SQLException ex) {
+          Logger.getLogger(Bd.class.getName()).log(Level.SEVERE, null, ex);
+      }
+         String sql2 = "INSERT INTO valoraciones(id_componente,mensaje,usuario,nota) VALUES('"+id_componente+"','"+comentario+"','"+nombreUs+"','"+puntuacion+"')";
+      try {
+          pst = conn.prepareStatement(sql2);
+          pst.executeUpdate();
+          agregado = true;
+      } catch (SQLException ex) {
+          Logger.getLogger(Bd.class.getName()).log(Level.SEVERE, null, ex);
+      }
+         return agregado;
+     }
+     public List<Comentario> obtenerComentarios(String comp){
+         List<Comentario> comentarios = new ArrayList<>();
+         int id_componente = 0;
+         String sql = "SELECT * FROM componente where nombre like '"+comp+"'";
+      try {
+          pst = conn.prepareStatement(sql);
+          rs = pst.executeQuery();
+          while(rs.next()){
+             id_componente = rs.getInt(1);
+          
+          }
+      } catch (SQLException ex) {
+          Logger.getLogger(Bd.class.getName()).log(Level.SEVERE, null, ex);
+      }
+      String sql2="SELECT * FROM valoraciones where id_componente="+id_componente;
+      try {
+          pst = conn.prepareStatement(sql2);
+          rs = pst.executeQuery();
+          while(rs.next()){
+              int puntos = rs.getInt(5);
+              String mensaje = rs.getString(3);
+              String usuario = rs.getString(4);
+              Comentario comentario = new Comentario(puntos, mensaje, usuario);
+              comentarios.add(comentario);
+          
+          }
+      } catch (SQLException ex) {
+          Logger.getLogger(Bd.class.getName()).log(Level.SEVERE, null, ex);
+      }
+      return comentarios;
+     
+     }
 }
