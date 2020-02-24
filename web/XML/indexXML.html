@@ -1,0 +1,206 @@
+<html>
+    <head>
+        <title>TODO supply a title</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        <style>
+            .veinte{
+                width: 20%;
+                display:inline-block;
+            }
+            .ochenta{
+                width: 77%;
+                display: inline-block;
+            }
+            .izquierda{
+                text-align: right;
+            }
+            .borde{
+                border:1px solid black;
+                border-radius: 5px;
+            }
+            .compo{
+                width: 19%;
+                margin: 2%;
+                display: inline-block;
+            }
+            img{
+                width: 90%;
+                max-height: 100px;
+
+            }
+            h4{
+                text-align: center;
+            }
+            .orange{
+                color:rgb(255, 51, 0);
+            }
+            .modal {
+                display: none; /* Hidden by default */
+                position: fixed; /* Stay in place */
+                z-index: 1; /* Sit on top */
+                left: 0!important;
+                top: 0!important;
+                width: 100%; /* Full width */
+                height: 100%; /* Full height */
+                overflow: auto; /* Enable scroll if needed */
+                background-color: rgb(0,0,0); /* Fallback color */
+                background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+                }
+
+                /* Modal Content/Box */
+            .modal-content {
+                background-color: #fefefe;
+                margin:auto; /* 15% from the top and centered */
+                padding: 20px;
+                margin-top: 1% !important;
+                border: 1px solid #888;
+                width: 90%; /* Could be more or less, depending on screen size */
+                }
+
+                /* The Close Button */
+            .close {
+                color: #aaa;
+                float: right;
+                font-size: 28px;
+                font-weight: bold;
+                }
+
+            .close:hover,
+            .close:focus {
+                color: black;
+                text-decoration: none;
+                cursor: pointer;
+                }
+            .compoModal{
+                width: 100%;
+            }
+            .centro{
+                width: auto;
+                text-align: center;
+            }
+            .separado{
+                margin:1%;
+                padding: 5%;
+            }
+
+
+
+/*---------------------------------------------------------------------------------------*/
+            .medio{
+            width: 48% !important;
+            display: inline-block !important;
+            vertical-align: middle;
+            }
+            .entero{
+                width: auto;
+            }
+            .comentario{
+                width: 250px;
+                height: 50px;
+            }
+            .imagen{
+                width: 70%;
+                max-height: 100%;
+            }
+            p {
+            text-align: left;
+            }
+
+            p label {
+            font-size: 20px;
+            }
+
+            input[type="radio"] {
+            display: none;
+            }
+
+            p label {
+            color: grey;
+            }
+
+            .clasificacion {
+            direction: rtl;
+            unicode-bidi: bidi-override;
+            }
+
+            p label:hover,
+            p label:hover ~ label {
+            color: orange;
+            }
+
+            input[type="radio"]:checked ~ label {
+            color: orange;
+            }
+            .size{
+                width: 60%;
+            }
+            .parrafo{
+                border: 1px solid black;
+                padding: 2%;
+                border-radius: 5px;
+            }
+        </style>
+    <script type="text/javascript" src="codigoXML.js"></script>
+    </head>
+    <body>
+        <div>
+            <div class="izquierda" class="borde">
+                <label for="busqueda">Busca lo que necesites: </label>
+                <input type="text" name="busqueda" id="busqueda">
+            </div>
+            <div class="veinte" class="borde">
+
+                <div id="pequeno" class="borde separado" >
+                    
+                </div>
+                
+                <div id="pequenoN2" class="borde separado">
+
+                </div>
+
+            </div>
+            <div class="ochenta" id="grande" class="borde">
+
+            </div>
+        </div>
+        <div id="modal" class="modal">
+            <div class="modal-content">
+                <span class="close">&times;</span>
+                <div id="dentroModal">
+                    <div class="entero"> 
+                        <div class="medio">
+                            <img class="imagen" src="" alt="" id="imagenProducto">
+                        </div>
+                        <div class="medio">
+                            <h1 id="nombreProducto"></h1>
+                            <h2 id="precioProducto"></h2>
+                            <div class="comentario">
+                                <p class="clasificacion">
+                                <input id="radio1" type="radio" name="estrellas" value="1"><!--
+                                --><label for="radio1">★</label><!--
+                                --><input id="radio2" type="radio" name="estrellas" value="2"><!--
+                                --><label for="radio2">★</label><!--
+                                --><input id="radio3" type="radio" name="estrellas" value="3"><!--
+                                --><label for="radio3">★</label><!--
+                                --><input id="radio4" type="radio" name="estrellas" value="4"><!--
+                                --><label for="radio4">★</label><!--
+                                --><input id="radio5" type="radio" name="estrellas" value="5"><!--
+                                --><label for="radio5">★</label>
+                                </p>
+                            </div>
+                            <label for="nombre">Tu nombre: </label><br>
+                            <input type="text" name="nombre" id="nombre"><br>
+                            <label for="comentario">Comentario: </label><br>
+                            <textarea class="size" name="comentario" id="comentario"></textarea><br>
+                            <input type="button" value="Enviar tu comentario" id="enviado">
+                        </div>
+                    </div>
+                    <div class="entero" id="comentarios"></div>
+                </div>
+              </div>
+        </div>
+    </body>
+</html>
+

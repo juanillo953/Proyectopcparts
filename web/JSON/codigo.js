@@ -334,6 +334,7 @@ function agregaComentario(){
     }
 }
 function muestraComentarios(){
+    console.log(nombreProductoSeleccionado);
     peticion_http8 = inicializa_xhr();
     if(peticion_http8){
 
@@ -352,27 +353,27 @@ function mostrarComentarioModal(){
     if(peticion_http8.readyState==4){
 
         if(peticion_http8.status==200){
-
+            var txt20 = "";
+            document.getElementById("comentarios").innerHTML=txt20;
             respuestaJSON = peticion_http8.responseText;
             var respuesta = JSON.parse(respuestaJSON);  
 
-            var txt20 = "";
             var puntos = "";
             for(contador=0;contador<respuesta.length;contador++){
                 console.log(respuesta[contador].puntos);
-                if(respuesta[contador].puntos==1){
+                if(respuesta[contador].puntos==5){
                     puntos="★";
                 }  
-                else if(respuesta[contador].puntos==2){
+                else if(respuesta[contador].puntos==4){
                     puntos="★★";
                 }
                 else if(respuesta[contador].puntos==3){
                     puntos="★★★";
                 }
-                else if(respuesta[contador].puntos==4){
+                else if(respuesta[contador].puntos==2){
                     puntos="★★★★";
                 }
-                else if(respuesta[contador].puntos==5){
+                else if(respuesta[contador].puntos==1){
                     puntos="★★★★★";
                 }
                 
